@@ -17,7 +17,7 @@ export default function BtnLogin({ data }) {
         message.loading({ content: 'Logout...', key, duration: 1 })
             .then(() => {
             dispatch(action.logout())
-            history.push('/login');
+            history.push('/todoLishPreminium/login');
         })
             .then(() => {
                 message.success({ content: 'Done', key, duration: 1 })

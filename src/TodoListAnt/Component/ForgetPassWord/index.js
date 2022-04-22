@@ -16,11 +16,13 @@ export default function Signin() {
 
 const onFinish = (values) => {
     setSpinning(true);
-    dispatch(action.login(values))
+    dispatch(action.changePass({
+      email: values.email, 
+      password: values.password,
+    }))
       .then(() => {
         setSpinning(false);
-        if(LocalUser.getUser())
-          history.push('/todoLishPreminium');
+        history.push('/todoLishPreminium/login')
       })
   };
 
@@ -57,13 +59,17 @@ const onFinish = (values) => {
         autoComplete="off"
       >
         <Form.Item
-          label="Account"
-          name="account"
+          label="Email"
+          name="email"
           rules={[
             {
               required: true,
-              message: 'Please input your username!',
+              message: 'Please input your email here!',
             },
+            {
+              pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+              message: 'type your correct email here !'
+            }
           ]}
         >
           <Input />
@@ -82,7 +88,28 @@ const onFinish = (values) => {
           <Input.Password />
         </Form.Item>
 
-        <Link to='/todoLishPreminium/forget' className='text-[#0084fe] hover:text-[#0068ca]'>Forget your password ?</Link>
+        <Form.Item
+        name="confirm"
+        label="Confirm Password"
+        dependencies={['password']}
+        hasFeedback
+        rules={[
+          {
+            required: true,
+            message: 'Please confirm your password!',
+          },
+          ({ getFieldValue }) => ({
+            validator(_, value) {
+              if (!value || getFieldValue('password') === value) {
+                return Promise.resolve();
+              }
+              return Promise.reject(new Error('The two passwords that you entered do not match!'));
+            },
+          }),
+        ]}
+      >
+        <Input.Password />
+      </Form.Item>
   
         <Form.Item
           wrapperCol={{
@@ -94,6 +121,7 @@ const onFinish = (values) => {
             Đăng Nhập
           </Button>
         </Form.Item>
+
       </Form>
           </Spin>
         )}

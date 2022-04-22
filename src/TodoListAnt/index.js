@@ -1,5 +1,5 @@
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { Header, Body, Detail, InputTask, Navbar, Login, Signup } from './Component';
+import { Header, Body, Detail, InputTask, Navbar, Login, Signup, ForgetPass } from './Component';
 
 export default function Todo() {
     return (
@@ -9,20 +9,23 @@ export default function Todo() {
         <BrowserRouter>
         <Navbar/>
         <Switch>
-            <Route exact path='/'>
+            <Route exact path='/todoLishPreminium'>
             <InputTask/>
             <Body/>
                 </Route>
                 
-            <Route path='/detail/:id'>
+            <Route path='/todoLishPreminium/detail/:id'>
             <InputTask/>
                 <Detail/>                
             </Route>
-            <Route path='/login'>
+            <Route path='/todoLishPreminium/login'>
                 <Login/>
             </Route>
-            <Route path='/signup'>
+            <Route path='/todoLishPreminium/signup'>
                 <Signup/>
+            </Route>
+            <Route path='/todoLishPreminium/forget'>
+                <ForgetPass/>
             </Route>
         </Switch>
         </BrowserRouter>

@@ -15,6 +15,13 @@ const server = {
             method: 'POST',
             data
         })
+    },
+    changeUser(id, data) {
+        return axios({
+            url: `${BASE_URL}/${id}`,
+            method: 'PUT',
+            data
+        })
     }
 }
 

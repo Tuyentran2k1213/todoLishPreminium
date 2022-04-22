@@ -8,3 +8,4 @@ export const UPDATE_TASK = 'update the task in the redux';
 
 export const LOGIN_USER = 'Login the user';
 export const LOGOUT_USER = 'logout the user on this device';
+export const CHANGE_PASS = 'change the password of the user';

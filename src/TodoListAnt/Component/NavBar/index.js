@@ -76,7 +76,7 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
           <div className="flex justify-start lg:w-0 lg:flex-1">
-            <Link to='/'>
+            <Link to='/todoLishPreminium'>
             <span className="sr-only">Workflow</span>
               <img
                 className="h-8 w-auto sm:h-10"
@@ -317,12 +317,12 @@ export default function Header() {
                 ))}
               </div>
               <div>
-                <Link to='/signup' className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+                <Link to='/todoLishPreminium/signup' className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
                 Sign up
                 </Link>
                 <p className="mt-6 text-center text-base font-medium text-gray-500">
                   Existing customer?{' '}
-                  <Link to='/login' className="text-indigo-600 hover:text-indigo-500">
+                  <Link to='/todoLishPreminium/login' className="text-indigo-600 hover:text-indigo-500">
                       Login
                   </Link>
                 </p>

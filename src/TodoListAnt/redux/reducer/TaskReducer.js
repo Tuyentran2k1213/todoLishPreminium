@@ -1,6 +1,7 @@
-import { ADD_TASK, CHECK_TASK, DELE_TASK, EDIT_TASK, UPDATE_TASK, LOGIN_USER, LOGOUT_USER } from "../constant";
+import { ADD_TASK, CHECK_TASK, DELE_TASK, EDIT_TASK, UPDATE_TASK, LOGIN_USER, LOGOUT_USER, CHANGE_PASS } from "../constant";
 import localUser from '../../LocalUser';
 import { message, Modal } from 'antd';
+import server from "../../server";
 
 const initialState = {
     tasks: [
@@ -120,6 +121,23 @@ const taskReducer = (state=initialState, action) => {
         case LOGOUT_USER:
             localUser.removeUser();
             newState = { ...state, userLog: null };
+            break;
+        case CHANGE_PASS:
+            const { listDatas, infoUser } = action.payload;
+            const changeMail = listDatas.find(list => infoUser.email === list.email);
+            if(changeMail){
+                server.changeUser(changeMail.id, {...changeMail, password: infoUser.password})
+                .then(res => {
+                    message.success('Password changed');
+                })
+                .catch(err => {
+                    console.log(err);
+                    message.success(`Can't change your password`);
+                })
+            } else {
+                message.error(`Can't find your account`);
+            }
+                newState = { ...state };
             break;
         default:
             newState = { ...state };

@@ -15,7 +15,7 @@ export default function Detail() {
     const [btn, setBtn] = useState(currentTask.done);
 
     return (
-        <Card title={<Link to={'/'}><div className="flex items-center text-black hover:text-blue-500"><AiOutlineArrowLeft/> Back</div></Link>}>
+        <Card title={<Link to={'/todoLishPreminium'}><div className="flex items-center text-black hover:text-blue-500"><AiOutlineArrowLeft/> Back</div></Link>}>
       <div className="w-full lg:flex">
   <div className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style={{backgroundImage: `url('https://i.pravatar.cc/300?img=${param.id}')`}} title="Woman holding a mug">
   </div>
@@ -40,7 +40,7 @@ export default function Detail() {
       <Btn type='edited' data={param.id}/>
       </>
     )}
-    <Link to='/'>
+    <Link to='/todoLishPreminium'>
     <Btn type='deleted' data={param.id}/>
     </Link>
   </div>

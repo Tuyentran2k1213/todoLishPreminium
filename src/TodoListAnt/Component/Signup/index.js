@@ -13,7 +13,7 @@ export default function Login() {
       setSpinning(true);
         server.setUser(values)
           .then(res => {
-            history.push('/login');
+            history.push('/todoLishPreminium/login');
             setSpinning(false);
           })
           .catch(err => {
@@ -120,7 +120,7 @@ export default function Login() {
             status="403"
             title="403"
             subTitle="Sorry, you are not authorized to access this page."
-            extra={<Link to='/'><Button type="primary">Back Home</Button></Link>}
+            extra={<Link to='/todoLishPreminium'><Button type="primary">Back Home</Button></Link>}
           />
         )}
         </>
