@@ -6,14 +6,14 @@ import LocalUser from '../../LocalUser';
 
 export default function Login() {
 
-    const history = useNavigate(); 
+    const navigate = useNavigate(); 
     const [spinning, setSpinning] = useState(false);
 
     const onFinish = (values) => {
       setSpinning(true);
         server.setUser(values)
           .then(res => {
-            history('/todoLishPreminium/login');
+            navigate('/todoLishPreminium/login');
             setSpinning(false);
           })
           .catch(err => {

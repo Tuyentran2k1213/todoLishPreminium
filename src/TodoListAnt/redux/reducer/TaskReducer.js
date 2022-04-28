@@ -127,7 +127,7 @@ const taskReducer = (state=initialState, action) => {
             } else {               
                         localUser.setUser(user[0]);
                         newState = { ...state, userLog: user[0] };
-                        window.location.replace('/todoLishPreminium/main')
+                        // window.location.replace('/todoLishPreminium/main')
             }
             break;
         case LOGOUT_USER:
