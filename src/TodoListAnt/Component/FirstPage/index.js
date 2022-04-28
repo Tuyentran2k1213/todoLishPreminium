@@ -20,6 +20,7 @@ const onFinish = (values) => {
 
     return (
         <>
+        <div className='w-screen h-screen flex flex-col justify-center items-center'>
         {LocalUser.getUser() ? (
           <Result
           status="403"
@@ -29,7 +30,11 @@ const onFinish = (values) => {
         />
         ) : (
           <>
-          <h1 className='text-center text-3xl text-rose-400'>Login</h1>
+          <div className='text-5xl'>
+            <h1>WELCOME! <Link to='/todoLishPreminium/main'>TODOLIST APP</Link></h1>
+          </div>
+          <div className='container px-96'>
+              <h1 className='text-center text-3xl text-rose-400'>Login</h1>
           <Spin tip="loading..." size='large' spinning={spinner}>
           <Form
           className='w-full'
@@ -83,13 +88,21 @@ const onFinish = (values) => {
           }}
         >
           <Button className='rounded-lg px-5' type="primary" htmlType="submit">
-            Đăng Nhập
+            Login
           </Button>
         </Form.Item>
       </Form>
           </Spin>
+          </div>
+          <div className='container text-center'>
+          <p>or you can</p>
+          <Link to='/todoLishPreminium/main'>
+          Watch demo here
+          </Link>
+          </div>
           </>
         )}
+        </div>
         </>
     )
 }

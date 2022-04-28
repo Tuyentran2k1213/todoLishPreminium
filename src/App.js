@@ -10,7 +10,7 @@ function App() {
 
   return (
     load ? (<Loading/>) : (
-    <div className="App">
+    <div className="App bg-[#F1F1F6]">
     <Todo/>
   </div>
   )

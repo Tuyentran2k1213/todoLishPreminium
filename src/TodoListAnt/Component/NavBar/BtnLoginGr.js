@@ -4,20 +4,20 @@ import { UserCircleIcon } from '@heroicons/react/solid'
 import { useDispatch } from 'react-redux'
 import { action } from '../../redux'
 import { message } from 'antd';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function BtnLogin({ data }) {
 
     const dispatch = useDispatch();
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const handleSignout = () => {
         const key = 'updatable'
         message.loading({ content: 'Logout...', key, duration: 1 })
             .then(() => {
             dispatch(action.logout())
-            history.push('/todoLishPreminium/login');
+            navigate('/todoLishPreminium/login');
         })
             .then(() => {
                 message.success({ content: 'Done', key, duration: 1 })

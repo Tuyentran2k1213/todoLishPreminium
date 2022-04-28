@@ -1,5 +1,11 @@
-import { ADD_TASK, CHANGE_PASS, CHECK_TASK, DELE_TASK, EDIT_TASK, LOGIN_USER, LOGOUT_USER, UPDATE_TASK } from "../constant"
-import server from "../../server"
+import { ADD_TASK, CHANGE_PASS, CHECK_TASK, DELE_TASK, EDIT_TASK, LOGIN_USER, LOGOUT_USER, SPINNING, UPDATE_TASK, WATCH_CHANGE_PASS, WATCH_LOGIN } from "../constant"
+
+//Basic action
+export const spinning = payload => ({
+    type: SPINNING,
+    payload,
+})
+
 
 export const addTask = payload => ({
     type: ADD_TASK,
@@ -28,42 +34,33 @@ export const updateTask = payload => ({
 
 
 
-export const login = data => (
-    dispatch => (
-        server.getUser()
-            .then(res => {
-                dispatch({
-                    type: LOGIN_USER,
-                    payload: {
-                        userDatas: res.data,
-                        data,
-                    },
-                })
-            })
-            .catch(err => {
-                console.log(err);
-            })
-    )
-)
+
+
+//call api action
+export const login = payload => ({
+    type: LOGIN_USER,
+    payload
+})
 
 export const logout = () => ({
     type: LOGOUT_USER,
 })
 
-export const changePass = data => (
-    dispatch => (
-        server.getUser()
-            .then(res => {
-                dispatch({
-                    type: CHANGE_PASS,
-                    payload: {
-                        listDatas: res.data,
-                        infoUser: data,
-                    },
-                })
-            })
-            .catch(err => {
-                console.log(err);
-            })
-    )
-)
+export const changePass = payload => ({
+    type: CHANGE_PASS,
+    payload
+})
+
+
+
+
+//saga action
+export const loginSaga = data => ({
+    type: WATCH_LOGIN,
+    data,
+})
+
+export const changePassSaga = data => ({
+    type: WATCH_CHANGE_PASS,
+    data,
+})

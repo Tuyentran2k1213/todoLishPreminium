@@ -6,3 +6,4 @@ export { default as Navbar } from './NavBar';
 export { default as Login } from './Login';
 export { default as Signup } from './Signup';
 export { default as ForgetPass } from './ForgetPassWord';
+export { default as Firstpage } from './FirstPage';

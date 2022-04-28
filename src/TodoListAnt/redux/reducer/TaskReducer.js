@@ -1,43 +1,52 @@
-import { ADD_TASK, CHECK_TASK, DELE_TASK, EDIT_TASK, UPDATE_TASK, LOGIN_USER, LOGOUT_USER, CHANGE_PASS } from "../constant";
+import { ADD_TASK, CHECK_TASK, DELE_TASK, EDIT_TASK, UPDATE_TASK, LOGIN_USER, LOGOUT_USER, CHANGE_PASS, SPINNING } from "../constant";
 import localUser from '../../LocalUser';
 import { message, Modal } from 'antd';
 import server from "../../server";
 
 const initialState = {
     tasks: [
-        {
+        {   
+            key: 0,
             title: 'task 1',
             content: 'gfdsgsrgfsd',
             done: false,
             time: '2022-04-20 10:59:16',
         },
-        {
+        {   
+            key: 1,
             title: 'task 2',
             content: 'lorem isulum hdjfbs',
             done: false,
             time: '2022-04-20 10:59:16'
         },
-        {
+        {   
+            key: 2,
             title: 'task 3',
             content: 'gfdsgsdsadfsdfsdrgfsd',
             done: true,
             time: '2022-04-20 10:59:16',
         },
-        {
+        {   
+            key: 3,
             title: 'task 4',
             content: 'gfdsgfdsfsdfsrgfsd',
             done: true,
             time: '2022-04-20 10:59:16',
         },
     ],
+    spinner: false,
     chooseTask: null,
     userLog: localUser.getUser(),
+    allUser: [],
 }
 
 const taskReducer = (state=initialState, action) => {
     var newState;
 
     switch(action.type){
+        case SPINNING:
+            newState = { ...state, spinner: action.payload }
+            break;
         case ADD_TASK:
             if(state.userLog){
                 newState = {...state, tasks: [...state.tasks, action.payload]};
@@ -102,10 +111,8 @@ const taskReducer = (state=initialState, action) => {
             message.success('Update successful');  
             break;
         case LOGIN_USER:
+            console.log(action.payload);
             const { userDatas, data } = action.payload;
-            console.log(userDatas);
-            console.log(data);
-
             const user = userDatas.filter(userData => (
                 userData.password === data.password && userData.account === data.account
             ));
@@ -113,9 +120,10 @@ const taskReducer = (state=initialState, action) => {
             if(user.length === 0){
                 alert('Your password or your user account maybe wrong, please try again')
                 newState = { ...state };
-            } else {
-                localUser.setUser(user[0]);
-                newState = { ...state, userLog: user[0] };
+            } else {               
+                        localUser.setUser(user[0]);
+                        newState = { ...state, userLog: user[0] };
+                        window.location.replace('/todoLishPreminium/main')
             }
             break;
         case LOGOUT_USER:
@@ -134,6 +142,7 @@ const taskReducer = (state=initialState, action) => {
                     console.log(err);
                     message.success(`Can't change your password`);
                 })
+                window.location.replace('/todoLishPreminium/login')
             } else {
                 message.error(`Can't find your account`);
             }

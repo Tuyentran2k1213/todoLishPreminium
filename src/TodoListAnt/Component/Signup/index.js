@@ -1,19 +1,19 @@
 import { Form, Input, Button, Spin, Result } from 'antd';
 import { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import server from '../../server';
 import LocalUser from '../../LocalUser';
 
 export default function Login() {
 
-    const history = useHistory(); 
+    const history = useNavigate(); 
     const [spinning, setSpinning] = useState(false);
 
     const onFinish = (values) => {
       setSpinning(true);
         server.setUser(values)
           .then(res => {
-            history.push('/todoLishPreminium/login');
+            history('/todoLishPreminium/main/login');
             setSpinning(false);
           })
           .catch(err => {
@@ -29,6 +29,8 @@ export default function Login() {
     return (
         <>
         {!LocalUser.getUser() ? (
+          <>
+          <h1 className='text-center text-rose-400 text-3xl'>Sign up</h1>
           <Spin size='large' tip='Sign up...' spinning={spinning}>
           <Form
           className='w-full'
@@ -115,12 +117,13 @@ export default function Login() {
         </Form.Item>
       </Form>
           </Spin>
+          </>
         ) : (
           <Result
             status="403"
             title="403"
             subTitle="Sorry, you are not authorized to access this page."
-            extra={<Link to='/todoLishPreminium'><Button type="primary">Back Home</Button></Link>}
+            extra={<Link to='/todoLishPreminium/main'><Button type="primary">Back Home</Button></Link>}
           />
         )}
         </>

@@ -26,19 +26,19 @@ export default function Btn({type, data}) {
                 return {
                     method: handleCheck,
                     content: () => (<FaCheck/>),
-                    class: 'inline-block mx-1 px-6 py-2.5 bg-purple-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-800 active:shadow-lg transition duration-150 ease-in-out'
+                    class: 'bg-[#FFDE7D] px-5 py-2 rounded-md hover:bg-[#e0c36d]'
                 }
             case 'edited':
                 return {
                     method: handleEdit,
                     content: () => (<FaRegEdit/>),
-                    class: 'inline-block mx-1 px-6 py-2.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-700 active:shadow-lg transition duration-150 ease-in-out'
+                    class: 'bg-[#3EC1D3] px-5 py-2 rounded-md hover:bg-[#54b1bd]'
                 }
             case 'deleted':
                 return {
                     method: handleDele,
                     content: () => (<FaTrashAlt/>),
-                    class: 'inline-block mx-1 px-6 py-2.5 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out'
+                    class: 'bg-[#FF165D] px-5 py-2 rounded-md hover:bg-[#d41e55] text-black'
                 }
             default:
                 alert('error');

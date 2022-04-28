@@ -14,6 +14,7 @@ export default function InputTask() {
   const dispatch = useDispatch();
 
   const chooseTask = useSelector(state => state.taskReducer.chooseTask);
+  const tasks = useSelector(state => state.taskReducer.tasks);
 
   const [editmode, setEditMode] = useState(true);
 
@@ -32,7 +33,7 @@ export default function InputTask() {
 
     const onFinish = (values) => {
       if(!editmode) {
-        dispatch(addTask({...values, done: false, time: values.time.format('YYYY-MM-DD HH:mm:ss')}));
+        dispatch(addTask({...values, key: tasks.length, done: false, time: values.time.format('YYYY-MM-DD HH:mm:ss')}));
       }
       if(editmode) {
         dispatch(updateTask({...values, time: values.time.format('YYYY-MM-DD HH:mm:ss')}));

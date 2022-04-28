@@ -7,13 +7,17 @@ import reportWebVitals from './reportWebVitals';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import { rootTaskReducer } from './TodoListAnt/redux';
-import thunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga'
+import rootSaga from './TodoListAnt/redux/saga';
 
+const sagaMiddleware = createSagaMiddleware()
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(rootTaskReducer, composeEnhancers(
-  applyMiddleware(thunk),
+  applyMiddleware(sagaMiddleware),
 ));
+
+sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <Provider store={store}>

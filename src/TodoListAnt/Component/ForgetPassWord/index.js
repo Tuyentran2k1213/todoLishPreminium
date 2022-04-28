@@ -1,29 +1,20 @@
 import { Form, Input, Button, Spin, Result } from 'antd';
 import { action } from '../../redux';
-import { useDispatch } from 'react-redux';
-import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import LocalUser from '../../LocalUser';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function Signin() {
 
-  const history = useHistory();
-
   const dispatch = useDispatch();
-
-  const [spinning, setSpinning] = useState(false);
+  const { spinner } = useSelector(state => state.taskReducer);
 
 
 const onFinish = (values) => {
-    setSpinning(true);
-    dispatch(action.changePass({
-      email: values.email, 
-      password: values.password,
-    }))
-      .then(() => {
-        setSpinning(false);
-        history.push('/todoLishPreminium/login')
-      })
+    dispatch(action.changePassSaga({
+      email: values.email,
+      Password: values.Password,
+    }));
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -37,10 +28,12 @@ const onFinish = (values) => {
           status="403"
           title="403"
           subTitle="Sorry, you are not authorized to access this page."
-          extra={<Link to={'/todoLishPreminium'}><Button type="primary">Back Home</Button></Link>}
+          extra={<Link to={'/todoLishPreminium/main'}><Button type="primary">Back Home</Button></Link>}
         />
         ) : (
-          <Spin tip="loading..." size='large' spinning={spinning}>
+          <>
+          <h1 className='text-center text-rose-400 text-3xl'>Change your password</h1>
+          <Spin tip="loading..." size='large' spinning={spinner}>
           <Form
           className='w-full'
           layout='vertical'
@@ -124,6 +117,7 @@ const onFinish = (values) => {
 
       </Form>
           </Spin>
+          </>
         )}
         </>
     )
