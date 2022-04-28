@@ -2,17 +2,25 @@ import { Form, Input, Button, Spin, Result } from 'antd';
 import { action } from '../../redux';
 import { useDispatch, useSelector } from 'react-redux';
 import LocalUser from '../../LocalUser';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 export default function Signin() {
 
   const dispatch = useDispatch();
-  const { spinner } = useSelector(state => state.taskReducer);
+  const { spinner, userLog } = useSelector(state => state.taskReducer);
 
 
 const onFinish = (values) => {  
   dispatch(action.loginSaga(values))
   };
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if(userLog){
+      navigate('/todoLishPreminium/main');
+    }
+  }, [userLog])
 
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);

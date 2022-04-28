@@ -37,7 +37,7 @@ const initialTasks = [
 ];
 
 const initialState = {
-    tasks: userLocal ? userLocal.todoList : initialTasks,
+    tasks: userLocal ? userLocal.todoList : [...initialTasks],
     spinner: false,
     chooseTask: null,
     userLog: userLocal,
@@ -126,7 +126,7 @@ const taskReducer = (state=initialState, action) => {
                 newState = { ...state };
             } else {               
                         localUser.setUser(user[0]);
-                        newState = { ...state, userLog: user[0] };
+                        newState = { ...state, userLog: user[0], tasks: user[0].todoList };
                         // window.location.replace('/todoLishPreminium/main')
             }
             break;
