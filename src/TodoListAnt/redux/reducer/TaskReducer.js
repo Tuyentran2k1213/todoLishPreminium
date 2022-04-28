@@ -3,40 +3,44 @@ import localUser from '../../LocalUser';
 import { message, Modal } from 'antd';
 import server from "../../server";
 
+const userLocal = localUser.getUser();
+
+const initialTasks = [
+    {   
+        key: 0,
+        title: 'task 1',
+        content: 'gfdsgsrgfsd',
+        done: false,
+        time: '2022-04-20 10:59:16',
+    },
+    {   
+        key: 1,
+        title: 'task 2',
+        content: 'lorem isulum hdjfbs',
+        done: false,
+        time: '2022-04-20 10:59:16'
+    },
+    {   
+        key: 2,
+        title: 'task 3',
+        content: 'gfdsgsdsadfsdfsdrgfsd',
+        done: true,
+        time: '2022-04-20 10:59:16',
+    },
+    {   
+        key: 3,
+        title: 'task 4',
+        content: 'gfdsgfdsfsdfsrgfsd',
+        done: true,
+        time: '2022-04-20 10:59:16',
+    },
+];
+
 const initialState = {
-    tasks: [
-        {   
-            key: 0,
-            title: 'task 1',
-            content: 'gfdsgsrgfsd',
-            done: false,
-            time: '2022-04-20 10:59:16',
-        },
-        {   
-            key: 1,
-            title: 'task 2',
-            content: 'lorem isulum hdjfbs',
-            done: false,
-            time: '2022-04-20 10:59:16'
-        },
-        {   
-            key: 2,
-            title: 'task 3',
-            content: 'gfdsgsdsadfsdfsdrgfsd',
-            done: true,
-            time: '2022-04-20 10:59:16',
-        },
-        {   
-            key: 3,
-            title: 'task 4',
-            content: 'gfdsgfdsfsdfsrgfsd',
-            done: true,
-            time: '2022-04-20 10:59:16',
-        },
-    ],
+    tasks: userLocal ? userLocal.todoList : initialTasks,
     spinner: false,
     chooseTask: null,
-    userLog: localUser.getUser(),
+    userLog: userLocal,
     allUser: [],
 }
 
@@ -128,7 +132,7 @@ const taskReducer = (state=initialState, action) => {
             break;
         case LOGOUT_USER:
             localUser.removeUser();
-            newState = { ...state, userLog: null };
+            newState = { ...state, userLog: null, tasks: initialTasks };
             break;
         case CHANGE_PASS:
             const { listDatas, infoUser } = action.payload;

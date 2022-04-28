@@ -13,7 +13,7 @@ export default function Login() {
       setSpinning(true);
         server.setUser(values)
           .then(res => {
-            history('/todoLishPreminium/main/login');
+            history('/todoLishPreminium/login');
             setSpinning(false);
           })
           .catch(err => {

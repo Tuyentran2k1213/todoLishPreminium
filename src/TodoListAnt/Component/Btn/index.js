@@ -1,10 +1,16 @@
+import { message, Modal } from 'antd';
 import { FaCheck, FaRegEdit, FaTrashAlt } from 'react-icons/fa';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { action } from '../../redux';
+
+import server from '../../server';
 
 export default function Btn({type, data}) {
 
     const dispatch = useDispatch();
+    const { userLog, tasks } = useSelector(state => state.taskReducer);
+    
+    const key = 'updatable';
 
     const { checkedTask, deleTask, editTask } = action;
 
@@ -18,6 +24,24 @@ export default function Btn({type, data}) {
 
     const handleDele = () => {
         dispatch(deleTask(data));
+    }
+
+    const handleSave = () => {
+        if(userLog){
+            message.loading({ content: 'Saving...', key });
+            server.changeUser(userLog.id, {...userLog, todoList: [...tasks]})
+            .then(res => {
+                message.success({ content: 'Save done!', key, duration: 1.5 });
+            })
+            .catch(err => {
+                message.error({ content: 'Save undone, something happen', key, duration: 1.5 });
+            })
+        } else {
+            Modal.error({
+                title: `Can't Save !!!`,
+                content: `You can't save if you don't login`,
+            })
+        }
     }
 
     const classBtn = () => {
@@ -39,6 +63,12 @@ export default function Btn({type, data}) {
                     method: handleDele,
                     content: () => (<FaTrashAlt/>),
                     class: 'bg-[#FF165D] px-5 py-2 rounded-md hover:bg-[#d41e55] text-black'
+                }
+            case 'saved':
+                return {
+                    method: handleSave,
+                    content: () => (<span>Save Change</span>),
+                    class: 'bg-[#00FFC6] px-5 py-2 rounded-md hover:bg-[#01dfaf] text-black'
                 }
             default:
                 alert('error');

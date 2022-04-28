@@ -71,6 +71,10 @@ export default function Body() {
         value={search}
         size="large" placeholder="Search for the tasks here" suffix={<SearchOutlined />} />
         </div>
+
+        <div className='flex justify-end my-2'>
+        <Btn type='saved'/>
+        </div>
         
 <div className="flex flex-col py-5">
   <div className="overflow-x-auto sm:-mx-6 lg:-mx-8 border-2 border-gray-300">
